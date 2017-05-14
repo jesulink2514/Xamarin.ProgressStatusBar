@@ -6,24 +6,17 @@
              xmlns:controls1="clr-namespace:DemoLive.Controls;assembly=DemoLive"
              Title="DemoLive"
              x:Class="DemoLive.MainPage">
-<!--<ListView ItemsSource="{Binding Items}" >
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <controls:ExtendedTextCell Text="{Binding Title}" 
-                      Detail="{Binding Detail}" ShowDisclousure="True"/>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-</ListView>-->
-    <Grid>
+    <Grid BackgroundColor="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="50" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
-                                            HorizontalOptions="FillAndExpand"
-                                            ActiveColor="#1ADC22" InactiveColor="#BBBBBB" Margin="20"/>
+        <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="15" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
+                                            HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"
+                                            ActiveColor="#1DB623" InactiveColor="#9D9D9D"
+                                            Margin="10"/>
         
-        <StackLayout Grid.Row="1" BackgroundColor="Yellow">
+        <StackLayout Grid.Row="1" Padding="10" BackgroundColor="White">
             <Button Text="Change Status" Clicked="Button_OnClicked"></Button>
         </StackLayout>
     </Grid>

@@ -92,7 +92,7 @@ namespace DemoLive.Controls
                     Invalidate();
                 },0,1);
                 SetValue(CurrentStatusIndexProperty, value);
-                an.Commit(this, "percentage",easing:Easing.BounceIn, length: 500);
+                an.Commit(this, "percentage",easing:Easing.CubicInOut, length: 500);
                 Invalidate();
             }
         }

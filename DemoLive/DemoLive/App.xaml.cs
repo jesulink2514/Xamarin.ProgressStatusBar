@@ -13,7 +13,7 @@ namespace DemoLive
         {
             InitializeComponent();
 
-            MainPage = new DemoLive.MainPage();
+            MainPage = new NavigationPage(new DemoLive.MainPage());
         }
 
         protected override void OnStart()
