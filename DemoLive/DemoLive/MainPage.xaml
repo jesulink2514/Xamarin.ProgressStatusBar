@@ -19,10 +19,10 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Label HorizontalOptions="Start" Grid.Column="0" Text="Stat 1"></Label>
-        <Label HorizontalOptions="Center" Grid.Column="1" Text="Stat 2"></Label>
-        <Label HorizontalOptions="Center" Grid.Column="2" Text="Stat 3"></Label>
-        <Label HorizontalOptions="End" Grid.Column="3" Text="Stat 4"></Label>
+        <Label HorizontalOptions="Start" Grid.Column="0" Text="Draft" Margin="10,0,0,0"></Label>
+        <Label HorizontalOptions="Center" Grid.Column="1" Text="Availability"></Label>
+        <Label HorizontalOptions="Center" Grid.Column="2" Text="Order Proccess"></Label>
+        <Label HorizontalOptions="End" Grid.Column="3" Text="Finish" Margin="0,0,10,0"></Label>
 
         <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="15" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
                                             HorizontalOptions="FillAndExpand" BackgroundColor="#E4E1E1"
