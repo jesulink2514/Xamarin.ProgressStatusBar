@@ -194,7 +194,7 @@ namespace DemoLive.Controls
 
             var radius = StatusCircleRadius;
             var pathsNumber = StatusesNumber - 1;
-            var pathWidth = totalWidth / pathsNumber;
+            var pathWidth = (totalWidth - 2*radius) / pathsNumber;
             var pathHeight = StatusBarHeight;
 
             var activeIndex = CurrentStatusIndex;
@@ -207,7 +207,7 @@ namespace DemoLive.Controls
             
             canvas.FillRectangle(basex,baseY,baseWidth,pathHeight,GetInactiveBrush());
 
-            var width = (activeIndex - 1 + _percentage) * pathWidth - 2 * radius;
+            var width = (activeIndex - 1 + _percentage) * pathWidth;
             canvas.FillRectangle(basex, baseY, width, pathHeight, GetActiveBrush());
 
             //Draw status circles
@@ -217,8 +217,6 @@ namespace DemoLive.Controls
             {
                 //Draw Status Circle
                 var startX = pathWidth * i + Padding.Left;
-                if (i != 0)
-                    startX = (pathWidth * i) - 2* radius;
                 
                 SolidBrush color;
 
