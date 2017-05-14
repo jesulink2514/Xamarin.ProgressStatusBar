@@ -6,15 +6,15 @@
              xmlns:controls1="clr-namespace:DemoLive.Controls;assembly=DemoLive"
              Title="DemoLive"
              x:Class="DemoLive.MainPage">
-    <Grid BackgroundColor="LightGray">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="15" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
-                                            HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"
+                                            HorizontalOptions="FillAndExpand" BackgroundColor="#FB0000"
                                             ActiveColor="#1DB623" InactiveColor="#9D9D9D"
-                                            Margin="10"/>
+                                            Padding="10"/>
         
         <StackLayout Grid.Row="1" Padding="10" BackgroundColor="White">
             <Button Text="Change Status" Clicked="Button_OnClicked"></Button>

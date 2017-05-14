@@ -111,40 +111,44 @@ namespace DemoLive.Controls
 
             control.CurrentStatusIndex = intValue;
         }
-
         #endregion
 
         private double percentage = 0;
 
         public override void Draw(ICanvas canvas, Rect rect)
         {
+            //calculating using padding
+            var totalWidth = rect.Width - (Padding.Right + Padding.Left);
+            var totalHeight = rect.Height - (Padding.Top + Padding.Bottom);
+
             var radius = 15;
             var pathsNumber = StatusesNumber - 1;
-            var pathWidth = rect.Width / pathsNumber;
+            var pathWidth = totalWidth / pathsNumber;
             var pathHeight = 10;
 
             var activeIndex = CurrentStatusIndex;
 
             //Draw paths
             //Draw base path
-            var basex = radius;
-            var baseY = (rect.Height - pathHeight) / 2;
-            var baseWidth  = rect.Width - 2*radius;
+            var basex = radius + Padding.Left;
+            var baseY = (totalHeight - pathHeight) / 2 + Padding.Top;
+            var baseWidth  = totalWidth - 2*radius;
             
             canvas.FillRectangle(basex,baseY,baseWidth,pathHeight,GetInactiveBrush());
 
             var width = (activeIndex - 1 + percentage) * pathWidth - 2 * radius;
             canvas.FillRectangle(basex, baseY, width, pathHeight, GetActiveBrush());
-            
+
+            //Draw status circles
+            var startYCircle = (totalHeight / 2) - radius + Padding.Top;
+
             for (int i = 0; i < StatusesNumber; i++)
             {
                 //Draw Status Circle
-                var startX = pathWidth * i;
+                var startX = pathWidth * i + Padding.Left;
                 if (i != 0)
                     startX = (pathWidth * i) - 2* radius;
                 
-                var startY = (rect.Height / 2) - radius;
-
                 SolidBrush color;
 
                 if (i == activeIndex)
@@ -159,7 +163,7 @@ namespace DemoLive.Controls
 
                 }
 
-                canvas.FillEllipse(startX, startY, 2 * radius, 2 * radius,color);
+                canvas.FillEllipse(startX, startYCircle, 2 * radius, 2 * radius,color);
             }
 
         }
