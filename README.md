@@ -1,4 +1,5 @@
 #Xamarin.ProgressStatusBar
+<br/>
 [![NuGet version](https://badge.fury.io/nu/SomosTechies.ProgressStatusBar.svg)](https://badge.fury.io/nu/SomosTechies.ProgressStatusBar)
 
 ![](https://somostechies.com/content/images/2017/05/screenshot-1.jpg)
