@@ -1,3 +1,6 @@
+#Xamarin.ProgressStatusBar
+[![NuGet version](https://badge.fury.io/nu/SomosTechies.ProgressStatusBar.svg)](https://badge.fury.io/nu/SomosTechies.ProgressStatusBar)
+
 ![](https://somostechies.com/content/images/2017/05/screenshot-1.jpg)
 Con la intencion de diseñar una pantalla he construido un control para **Xamarin.Forms** usando **NControl**. Este control nos permite mostrar una barra de progreso que podemos usar para graficar el estado de una orden o algo similar.
 
