@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DemoLive"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=DemoLive"
+             xmlns:controls1="clr-namespace:DemoLive.Controls;assembly=DemoLive"
+             Title="DemoLive"
+             x:Class="DemoLive.MainPage">
+<!--<ListView ItemsSource="{Binding Items}" >
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <controls:ExtendedTextCell Text="{Binding Title}" 
+                      Detail="{Binding Detail}" ShowDisclousure="True"/>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="50" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
+                                            HorizontalOptions="FillAndExpand"
+                                            ActiveColor="#1ADC22" InactiveColor="#BBBBBB" Margin="20"/>
+        
+        <StackLayout Grid.Row="1" BackgroundColor="Yellow">
+            <Button Text="Change Status" Clicked="Button_OnClicked"></Button>
+        </StackLayout>
+    </Grid>
+</ContentPage>
