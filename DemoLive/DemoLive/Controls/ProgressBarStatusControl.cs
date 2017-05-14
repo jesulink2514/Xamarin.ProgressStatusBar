@@ -14,11 +14,45 @@ namespace DemoLive.Controls
 {
     public class ProgressBarStatusControl: NControlView
     {
-        
+
         #region Properties
+        public static readonly BindableProperty ActiveStatusColorProperty = BindableProperty.Create(nameof(ActiveStatusColor), typeof(Xamarin.Forms.Color), typeof(ProgressBarStatusControl), Xamarin.Forms.Color.FromRgb(0, 0, 0), BindingMode.TwoWay, null, propertyChanged: OnActiveStatusColorChanged);
+        public Xamarin.Forms.Color ActiveStatusColor
+        {
+            get => (Xamarin.Forms.Color)GetValue(ActiveStatusColorProperty);
+            set
+            {
+                SetValue(ActiveStatusColorProperty, value);
+                this.Invalidate();
+            }
+        }
+        private static void OnActiveStatusColorChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var control = bindable as ProgressBarStatusControl;
+            if (control == null) return;
+            control.ActiveStatusColor = (Xamarin.Forms.Color)newvalue;
+        }
+
+
+        public static readonly BindableProperty InactiveStatusColorProperty = BindableProperty.Create(nameof(InactiveStatusColor), typeof(Xamarin.Forms.Color), typeof(ProgressBarStatusControl), Xamarin.Forms.Color.FromRgb(0, 0, 0), BindingMode.TwoWay, null, propertyChanged: OnInactiveStatusColorChanged);
+        public Xamarin.Forms.Color InactiveStatusColor
+        {
+            get => (Xamarin.Forms.Color)GetValue(InactiveStatusColorProperty);
+            set
+            {
+                SetValue(InactiveStatusColorProperty, value);
+                this.Invalidate();
+            }
+        }
+
+        private static void OnInactiveStatusColorChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var control = bindable as ProgressBarStatusControl;
+            if (control == null) return;
+            control.InactiveStatusColor = (Xamarin.Forms.Color)newvalue;
+        }
+        
         public static readonly BindableProperty ActiveColorProperty = BindableProperty.Create(nameof(ActiveColor), typeof(Xamarin.Forms.Color), typeof(ProgressBarStatusControl),Xamarin.Forms.Color.FromRgb(0, 0, 0),BindingMode.TwoWay, null, propertyChanged: OnActiveColorChanged);
-
-
         public Xamarin.Forms.Color ActiveColor
         {
             get => (Xamarin.Forms.Color)GetValue(ActiveColorProperty);
@@ -28,7 +62,6 @@ namespace DemoLive.Controls
                 this.Invalidate();
             }
         }
-
         private static void OnActiveColorChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             var control = bindable as ProgressBarStatusControl;
@@ -36,9 +69,8 @@ namespace DemoLive.Controls
             control.ActiveColor = (Xamarin.Forms.Color)newvalue;
         }
 
+
         public static readonly BindableProperty InactiveColorProperty = BindableProperty.Create(nameof(InactiveColor), typeof(Xamarin.Forms.Color), typeof(ProgressBarStatusControl), Xamarin.Forms.Color.FromRgb(0, 0, 0), BindingMode.TwoWay, null, propertyChanged: OnInactiveColorChanged);
-
-
         public Xamarin.Forms.Color InactiveColor
         {
             get => (Xamarin.Forms.Color)GetValue(InactiveColorProperty);
@@ -88,7 +120,7 @@ namespace DemoLive.Controls
             {
                 var an = new Animation((d) =>
                 {
-                    this.percentage = d;
+                    this._percentage = d;
                     Invalidate();
                 },0,1);
                 SetValue(CurrentStatusIndexProperty, value);
@@ -113,7 +145,7 @@ namespace DemoLive.Controls
         }
         #endregion
 
-        private double percentage = 0;
+        private double _percentage = 0;
 
         public override void Draw(ICanvas canvas, Rect rect)
         {
@@ -136,7 +168,7 @@ namespace DemoLive.Controls
             
             canvas.FillRectangle(basex,baseY,baseWidth,pathHeight,GetInactiveBrush());
 
-            var width = (activeIndex - 1 + percentage) * pathWidth - 2 * radius;
+            var width = (activeIndex - 1 + _percentage) * pathWidth - 2 * radius;
             canvas.FillRectangle(basex, baseY, width, pathHeight, GetActiveBrush());
 
             //Draw status circles
@@ -153,13 +185,13 @@ namespace DemoLive.Controls
 
                 if (i == activeIndex)
                 {
-                    color = Math.Abs(percentage - 1) < 0.1 ? GetActiveBrush() : GetInactiveBrush();
+                    color = Math.Abs(_percentage - 1) < 0.1 ? GetActiveCircleBrush() : GetInactiveCircleBrush();
                 }
                 else
                 {
                     color = i <= activeIndex
-                        ? GetActiveBrush()
-                        : GetInactiveBrush();
+                        ? GetActiveCircleBrush()
+                        : GetInactiveCircleBrush();
 
                 }
 
@@ -176,6 +208,16 @@ namespace DemoLive.Controls
         private NGraphics.SolidBrush GetInactiveBrush()
         {
             return new SolidBrush(this.InactiveColor.ToNColor());
+        }
+
+        private NGraphics.SolidBrush GetActiveCircleBrush()
+        {
+            return new SolidBrush(this.ActiveStatusColor.ToNColor());
+        }
+
+        private NGraphics.SolidBrush GetInactiveCircleBrush()
+        {
+            return new SolidBrush(this.InactiveStatusColor.ToNColor());
         }
     }
 }
