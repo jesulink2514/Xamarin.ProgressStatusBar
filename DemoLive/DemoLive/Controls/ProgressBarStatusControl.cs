@@ -16,6 +16,45 @@ namespace DemoLive.Controls
     {
 
         #region Properties
+        public static readonly BindableProperty StatusCircleRadiusProperty = BindableProperty.Create(nameof(StatusCircleRadius),typeof(double),typeof(ProgressBarStatusControl)
+            ,defaultValue:15d,propertyChanged:OnStatusCircleRadiusChanged);
+
+        private static void OnStatusCircleRadiusChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var value = (double)newValue;
+            if(value<= 0)return;
+            ((ProgressBarStatusControl) bindable).StatusCircleRadius = value;
+        }
+
+        public double StatusCircleRadius
+        {
+            get => (double)GetValue(StatusCircleRadiusProperty);
+            set
+            {
+                SetValue(StatusCircleRadiusProperty,value);
+                Invalidate();
+            }
+        }
+        public static readonly BindableProperty StatusBarHeightProperty = BindableProperty.Create(nameof(StatusBarHeight),typeof(double),
+            typeof(ProgressBarStatusControl),10d,propertyChanged:StatusBarHeightChanged);
+
+        private static void StatusBarHeightChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var value = (double)newValue;
+            if (value <= 0) return;
+            ((ProgressBarStatusControl)bindable).StatusBarHeight = value;
+        }
+
+        public double StatusBarHeight
+        {
+            get => (double)GetValue(StatusBarHeightProperty);
+            set
+            {
+                SetValue(StatusBarHeightProperty, value);
+                Invalidate();
+            }
+        }
+
         public static readonly BindableProperty ActiveStatusColorProperty = BindableProperty.Create(nameof(ActiveStatusColor), typeof(Xamarin.Forms.Color), typeof(ProgressBarStatusControl), Xamarin.Forms.Color.FromRgb(0, 0, 0), BindingMode.TwoWay, null, propertyChanged: OnActiveStatusColorChanged);
         public Xamarin.Forms.Color ActiveStatusColor
         {
@@ -153,10 +192,10 @@ namespace DemoLive.Controls
             var totalWidth = rect.Width - (Padding.Right + Padding.Left);
             var totalHeight = rect.Height - (Padding.Top + Padding.Bottom);
 
-            var radius = 15;
+            var radius = StatusCircleRadius;
             var pathsNumber = StatusesNumber - 1;
             var pathWidth = totalWidth / pathsNumber;
-            var pathHeight = 10;
+            var pathHeight = StatusBarHeight;
 
             var activeIndex = CurrentStatusIndex;
 

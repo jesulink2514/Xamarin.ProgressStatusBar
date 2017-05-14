@@ -9,15 +9,29 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label HorizontalOptions="Start" Grid.Column="0" Text="Stat 1"></Label>
+        <Label HorizontalOptions="Center" Grid.Column="1" Text="Stat 2"></Label>
+        <Label HorizontalOptions="Center" Grid.Column="2" Text="Stat 3"></Label>
+        <Label HorizontalOptions="End" Grid.Column="3" Text="Stat 4"></Label>
+
         <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="15" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
                                             HorizontalOptions="FillAndExpand" BackgroundColor="#E4E1E1"
                                             ActiveColor="#1DB623" InactiveColor="#9D9D9D"
                                             ActiveStatusColor="#0C9B11" InactiveStatusColor="#887E7E"
-                                            Padding="10"/>
-        
-        <StackLayout Grid.Row="1" Padding="10" BackgroundColor="White">
+                                            StatusBarHeight="5" StatusCircleRadius="10"
+                                            Padding="10" Grid.Row="1" Grid.ColumnSpan="4"/>
+
+        <StackLayout Grid.Row="2" Padding="10" BackgroundColor="White" Grid.ColumnSpan="4">
             <Button Text="Change Status" Clicked="Button_OnClicked"></Button>
         </StackLayout>
     </Grid>
