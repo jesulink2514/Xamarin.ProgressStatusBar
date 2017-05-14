@@ -86,7 +86,13 @@ namespace DemoLive.Controls
             get => (int)GetValue(CurrentStatusIndexProperty);
             set
             {
+                var an = new Animation((d) =>
+                {
+                    this.percentage = d;
+                    Invalidate();
+                },0,1);
                 SetValue(CurrentStatusIndexProperty, value);
+                an.Commit(this, "percentage",easing:Easing.BounceIn, length: 500);
                 Invalidate();
             }
         }
@@ -107,6 +113,9 @@ namespace DemoLive.Controls
         }
 
         #endregion
+
+        private double percentage = 0;
+
         public override void Draw(ICanvas canvas, Rect rect)
         {
             var radius = 15;
@@ -124,28 +133,9 @@ namespace DemoLive.Controls
             
             canvas.FillRectangle(basex,baseY,baseWidth,pathHeight,GetInactiveBrush());
 
-            for (int i = 0; i < pathsNumber; i++)
-            {
-                var currentWidth = pathWidth;
-
-                if (activeIndex < (i+1)) continue;
-
-                var startX = pathWidth * i;
-                if (i == 0)
-                {
-                    startX = startX + radius;
-                    currentWidth = currentWidth - radius;
-                }
-
-                if (i == (pathsNumber - 1)) currentWidth -= radius;
-
-                var startY = rect.Height / 2 - (pathHeight / 2);
-
-                //Draw path
-                //position radius/2
-                canvas.FillRectangle(startX, startY, currentWidth, pathHeight, GetActiveBrush());
-            }
-
+            var width = (activeIndex - 1 + percentage) * pathWidth - 2 * radius;
+            canvas.FillRectangle(basex, baseY, width, pathHeight, GetActiveBrush());
+            
             for (int i = 0; i < StatusesNumber; i++)
             {
                 //Draw Status Circle
@@ -155,9 +145,19 @@ namespace DemoLive.Controls
                 
                 var startY = (rect.Height / 2) - radius;
 
-                var color = i <= activeIndex
-                    ? GetActiveBrush()
-                    : GetInactiveBrush(); 
+                SolidBrush color;
+
+                if (i == activeIndex)
+                {
+                    color = Math.Abs(percentage - 1) < 0.1 ? GetActiveBrush() : GetInactiveBrush();
+                }
+                else
+                {
+                    color = i <= activeIndex
+                        ? GetActiveBrush()
+                        : GetInactiveBrush();
+
+                }
 
                 canvas.FillEllipse(startX, startY, 2 * radius, 2 * radius,color);
             }
