@@ -2,9 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DemoLive"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=DemoLive"
-             xmlns:controls1="clr-namespace:DemoLive.Controls;assembly=DemoLive"
-             Title="DemoLive"
+             xmlns:somostechies="clr-namespace:SomosTechies.ProgressStatusBar;assembly=SomosTechies.ProgressStatusBar"
+             Title="Demo Status Bar Control"
              x:Class="DemoLive.MainPage">
     <Grid>
         <Grid.RowDefinitions>
@@ -24,15 +23,21 @@
         <Label HorizontalOptions="Center" Grid.Column="2" Text="Order Proccess"></Label>
         <Label HorizontalOptions="End" Grid.Column="3" Text="Finish" Margin="0,0,10,0"></Label>
 
-        <controls1:ProgressBarStatusControl x:Name="Status" HeightRequest="15" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="2"
+        <somostechies:ProgressBarStatusControl x:Name="Status" HeightRequest="15" VerticalOptions="Start" StatusesNumber="4" CurrentStatusIndex="0"
                                             HorizontalOptions="FillAndExpand" BackgroundColor="#E4E1E1"
                                             ActiveColor="#1DB623" InactiveColor="#9D9D9D"
                                             ActiveStatusColor="#0C9B11" InactiveStatusColor="#887E7E"
                                             StatusBarHeight="5" StatusCircleRadius="10"
-                                            Padding="10" Grid.Row="1" Grid.ColumnSpan="4"/>
+                                            Padding="15,10" Grid.Row="1" Grid.ColumnSpan="4"/>
 
         <StackLayout Grid.Row="2" Padding="10" BackgroundColor="White" Grid.ColumnSpan="4">
-            <Button Text="Change Status" Clicked="Button_OnClicked"></Button>
+            <Label Text="Espresso" FontAttributes="Bold" FontSize="28"></Label>
+            <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum interdum odio vel lacinia. Etiam enim massa, venenatis nec egestas eget, egestas quis tellus. "></Label>
+            <Image Source="Coffe.png"></Image>
+            <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum interdum odio vel lacinia. Etiam enim massa, venenatis nec egestas eget, egestas quis tellus. "></Label>
+            <Label Text="$ 4.99" FontAttributes="Bold" FontSize="20"></Label>
+            <Button Text="Process Order" Clicked="Button_OnClicked"
+                    BorderRadius="5" BackgroundColor="#03B0EC" TextColor="White"></Button>
         </StackLayout>
     </Grid>
 </ContentPage>

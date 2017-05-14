@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NControl.Abstractions;
 using NControl.Controls;
 using NGraphics;
 using Xamarin.Forms;
-using Color = NGraphics.Color;
-using Point = NGraphics.Point;
 
-namespace DemoLive.Controls
+namespace SomosTechies.ProgressStatusBar
 {
     public class ProgressBarStatusControl: NControlView
     {
